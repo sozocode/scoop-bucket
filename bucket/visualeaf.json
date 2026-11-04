@@ -1,0 +1,38 @@
+{
+    "version": "1.0.2686",
+    "description": "Visual manager for MongoDB and SQL databases.",
+    "homepage": "https://visualeaf.com",
+    "license": {
+        "identifier": "Proprietary",
+        "url": "https://visualeaf.com"
+    },
+    "notes": "VisuaLeaf's own updater is turned off in this install. Update with: scoop update visualeaf",
+    "architecture": {
+        "64bit": {
+            "url": "https://release.sozocode.com/releases/v1.0.2686/VisuaLeaf-Setup-1.0.2686.exe#/dl.7z",
+            "hash": "6feff192906c9ef353c69d92ba0c1a30c9ce205723984985eb4bdcbec4c8f564",
+            "pre_install": "Expand-7zipArchive \"$dir\\`$PLUGINSDIR\\app-64.7z\" \"$dir\""
+        }
+    },
+    "post_install": [
+        "Remove-Item \"$dir\\`$PLUGINSDIR\", \"$dir\\`$R0\" -Force -Recurse",
+        "Set-Content -Path \"$dir\\resources\\package-manager\" -Value 'scoop' -NoNewline"
+    ],
+    "shortcuts": [
+        [
+            "VisuaLeaf.exe",
+            "VisuaLeaf"
+        ]
+    ],
+    "checkver": {
+        "url": "https://release.sozocode.com/releases/latest.yml",
+        "regex": "version: ([\\d.]+)"
+    },
+    "autoupdate": {
+        "architecture": {
+            "64bit": {
+                "url": "https://release.sozocode.com/releases/v$version/VisuaLeaf-Setup-$version.exe#/dl.7z"
+            }
+        }
+    }
+}
